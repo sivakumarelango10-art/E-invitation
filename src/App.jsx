@@ -19,7 +19,7 @@ export default function App() {
   const { isPlaying, toggleMusic, startMelody } = useAudio();
 
   // Initialize ultra-smooth scroll reveal triggers with reactive state
-  useIntersectionObserver('.reveal-init', { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }, [isOpened]);
+  useIntersectionObserver('.reveal-init', { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }, [isOpened]);
 
   const handleOpenDoors = () => {
     setIsOpeningAnim(true);
@@ -32,7 +32,7 @@ export default function App() {
     // Step 1: Doors start opening smoothly, mount downstream chapters
     setTimeout(() => {
       setIsOpened(true);
-    }, 600);
+    }, 500);
 
     // Step 2: Once door swing is complete, finish animation and cleanup overlay
     setTimeout(() => {
@@ -65,8 +65,11 @@ export default function App() {
           onOpenDoors={handleOpenDoors}
         />
 
-        {/* 2. Primary Top Screen: Temple Sanctum Reveal */}
-        <InvitationReveal />
+        {/* 2. Primary Top Screen: Temple Sanctum Reveal with Smooth Bloom */}
+        <InvitationReveal 
+          isOpened={isOpened}
+          isOpeningAnim={isOpeningAnim}
+        />
 
         {/* 3-8. Unfolding Invitation Chapters with Smooth Scrolling */}
         {(isOpened || isOpeningAnim) && (
