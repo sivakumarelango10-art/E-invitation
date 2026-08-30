@@ -41,7 +41,6 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
               className="door-wood-texture" 
               style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} 
             />
-            <div className="door-brass-knocker knocker-left" />
             <div className="door-inner-shadow" />
           </div>
 
@@ -51,7 +50,6 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
               className="door-wood-texture" 
               style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} 
             />
-            <div className="door-brass-knocker knocker-right" />
             <div className="door-inner-shadow" />
           </div>
         </div>

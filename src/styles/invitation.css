@@ -220,23 +220,6 @@ html, body {
   right: 0;
 }
 
-/* Brass Handles */
-.door-brass-knocker {
-  position: absolute;
-  top: 50%;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-full);
-  background: radial-gradient(circle at 35% 35%, #FFF0C2 0%, #D4AF37 55%, #8B6508 100%);
-  border: 1.5px solid #FFE082;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-  transform: translateY(-50%);
-  z-index: 6;
-}
-
-.knocker-left { right: 12px; }
-.knocker-right { left: 12px; }
-
 /* Center Text & CTA Overlay */
 .door-center-overlay {
   position: relative;
