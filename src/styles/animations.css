@@ -1,0 +1,157 @@
+/* Motion & Animation Engine — Luxury Cinematic Choreography */
+
+/* Subtle ambient breathing for decorative emblems */
+@keyframes ambientGaze {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.015);
+  }
+}
+
+@keyframes ambientRotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+/* Opening sequence keyframes */
+@keyframes revealRise {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.975);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes revealFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes lineDrawVertical {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* Slide in/out for numeric digits in countdown */
+@keyframes digitSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heart subtle tap resonance */
+@keyframes heartUnlock {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.92);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Photo crossfade settle */
+@keyframes photoSettle {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stagger utilities for scroll reveal */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity var(--dur-content) var(--ease-cinematic),
+              transform var(--dur-content) var(--ease-cinematic);
+  will-change: opacity, transform;
+}
+
+.reveal-active {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 80ms; }
+.stagger-2 { transition-delay: 180ms; }
+.stagger-3 { transition-delay: 280ms; }
+.stagger-4 { transition-delay: 380ms; }
+.stagger-5 { transition-delay: 480ms; }
+.stagger-6 { transition-delay: 580ms; }
+
+/* Micro-interaction touch feedback */
+.touch-press {
+  transition: transform var(--dur-micro) var(--ease-cinematic),
+              box-shadow var(--dur-micro) var(--ease-cinematic),
+              opacity var(--dur-micro) var(--ease-cinematic);
+}
+
+.touch-press:active {
+  transform: scale(0.96) !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
