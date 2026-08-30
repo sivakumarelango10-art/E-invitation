@@ -1,4 +1,19 @@
-/* Motion & Animation Engine — Luxury Cinematic Choreography */
+/* ==========================================================================
+   Master Motion & Animation Engine — Ultra-Smooth Cinematic Choreography
+   ========================================================================== */
+
+/* Ambient gentle floating for heart medallions */
+@keyframes heartGentleFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 
 /* Subtle ambient breathing for decorative emblems */
 @keyframes ambientGaze {
@@ -6,7 +21,7 @@
     transform: translateY(0) scale(1);
   }
   50% {
-    transform: translateY(-5px) scale(1.015);
+    transform: translateY(-6px) scale(1.02);
   }
 }
 
@@ -19,42 +34,25 @@
   }
 }
 
-@keyframes goldShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.35);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 12px rgba(212, 175, 55, 0);
   }
 }
 
-/* Opening sequence keyframes */
-@keyframes revealRise {
+/* Door overlay fade-out upon completed swing */
+@keyframes overlayFadeOut {
   0% {
-    opacity: 0;
-    transform: translateY(18px) scale(0.975);
+    opacity: 1;
+    visibility: visible;
   }
   100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes revealFade {
-  0% {
     opacity: 0;
-  }
-  100% {
-    opacity: 1;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -62,106 +60,32 @@
 @keyframes invitationUnfold {
   0% {
     opacity: 0;
-    transform: translateY(40px) scale(0.965);
-    filter: blur(4px);
-  }
-  60% {
-    opacity: 0.9;
-    transform: translateY(-3px) scale(1.004);
-    filter: blur(0px);
+    transform: translateY(36px) scale(0.97);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0px);
   }
 }
 
-@keyframes goldGlowRay {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  40% {
-    opacity: 0.85;
-    transform: scale(1.25);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.6);
-  }
-}
-
-@keyframes sealPopGlow {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px 12px rgba(212, 175, 55, 0.5);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-  }
-}
-
-@keyframes lineDrawVertical {
+/* Stem line progressive draw */
+@keyframes stemLineDraw {
   0% {
     transform: scaleY(0);
+    opacity: 0;
   }
   100% {
     transform: scaleY(1);
-  }
-}
-
-/* Slide in/out for numeric digits in countdown */
-@keyframes digitSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(7px);
-  }
-  100% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-/* Heart subtle tap resonance */
-@keyframes heartUnlock {
-  0% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scale(0.92);
-  }
-  70% {
-    transform: scale(1.04);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Photo crossfade settle */
-@keyframes photoSettle {
-  0% {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Stagger utilities for scroll reveal */
+/* Ultra-Smooth Stagger utilities for scroll reveal */
 .reveal-init {
   opacity: 0;
-  transform: translateY(22px) scale(0.985);
-  transition: opacity var(--dur-content) var(--ease-cinematic),
-              transform var(--dur-content) var(--ease-cinematic);
+  transform: translateY(32px) scale(0.975);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -170,23 +94,23 @@
   transform: translateY(0) scale(1) !important;
 }
 
-/* Stagger delays */
-.stagger-1 { transition-delay: 80ms; }
-.stagger-2 { transition-delay: 180ms; }
-.stagger-3 { transition-delay: 280ms; }
-.stagger-4 { transition-delay: 380ms; }
-.stagger-5 { transition-delay: 480ms; }
-.stagger-6 { transition-delay: 580ms; }
+/* Stagger delays for cascading elements */
+.stagger-1 { transition-delay: 60ms; }
+.stagger-2 { transition-delay: 150ms; }
+.stagger-3 { transition-delay: 240ms; }
+.stagger-4 { transition-delay: 330ms; }
+.stagger-5 { transition-delay: 420ms; }
+.stagger-6 { transition-delay: 510ms; }
 
 /* Micro-interaction touch feedback */
 .touch-press {
-  transition: transform var(--dur-micro) var(--ease-cinematic),
-              box-shadow var(--dur-micro) var(--ease-cinematic),
-              opacity var(--dur-micro) var(--ease-cinematic);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease;
 }
 
 .touch-press:active {
-  transform: scale(0.96) !important;
+  transform: scale(0.95) !important;
 }
 
 /* Reduced motion preference */

@@ -126,15 +126,14 @@ html, body {
   height: 100vh;
   height: 100svh;
   overflow: hidden;
-  perspective: 1200px;
+  perspective: 1400px;
   background: #1A1009;
   z-index: 30;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.royal-door-overlay.doors-opened {
-  opacity: 0;
-  pointer-events: none;
+.royal-door-overlay.doors-animating {
+  animation: overlayFadeOut 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
 }
 
 .door-viewport-container {
@@ -177,9 +176,11 @@ html, body {
   width: 50%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 1.6s ease;
   overflow: hidden;
   background-color: #27160C;
+  will-change: transform;
 }
 
 .door-leaf-left {
@@ -195,11 +196,13 @@ html, body {
 }
 
 .royal-double-doors.doors-open .door-leaf-left {
-  transform: perspective(1200px) rotateY(-112deg);
+  transform: perspective(1400px) rotateY(-118deg) scale(0.98);
+  box-shadow: inset -25px 0 45px rgba(0, 0, 0, 0.85);
 }
 
 .royal-double-doors.doors-open .door-leaf-right {
-  transform: perspective(1200px) rotateY(112deg);
+  transform: perspective(1400px) rotateY(118deg) scale(0.98);
+  box-shadow: inset 25px 0 45px rgba(0, 0, 0, 0.85);
 }
 
 .door-wood-texture {
@@ -220,6 +223,18 @@ html, body {
   right: 0;
 }
 
+.door-shading-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 60%);
+  pointer-events: none;
+  transition: opacity 1.4s ease;
+}
+
+.door-leaf-right .door-shading-gradient {
+  background: linear-gradient(270deg, rgba(0,0,0,0.3) 0%, transparent 60%);
+}
+
 /* Center Text & CTA Overlay */
 .door-center-overlay {
   position: relative;
@@ -227,14 +242,15 @@ html, body {
   text-align: center;
   padding: var(--space-xl) var(--space-md);
   color: #FFFFFF;
-  transition: opacity 0.6s var(--ease-cinematic), transform 0.6s var(--ease-cinematic);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   max-width: 320px;
   margin: 0 auto;
 }
 
 .door-center-overlay.overlay-faded {
   opacity: 0;
-  transform: scale(0.92);
+  transform: translateY(-24px) scale(0.93);
   pointer-events: none;
 }
 

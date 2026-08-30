@@ -6,11 +6,11 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
   const handleOpenClick = () => {
     if (isOpeningAnim || isOpened) return;
 
-    // Trigger golden and marigold petals confetti burst
+    // Trigger marigold flower petals confetti
     try {
       confetti({
-        particleCount: 55,
-        spread: 85,
+        particleCount: 60,
+        spread: 90,
         origin: { y: 0.6 },
         colors: ['#FFB703', '#FB8500', '#D4AF37', '#E9D8A6', '#FFFFFF'],
         disableForReducedMotion: true
@@ -20,13 +20,16 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
     onOpenDoors();
   };
 
-  if (isOpened && !isOpeningAnim) {
-    return null; // Fully removed after doors open, leaving ZERO blank space!
+  const isAnimating = isOpeningAnim;
+  const isFullyOpen = isOpened && !isOpeningAnim;
+
+  if (isFullyOpen) {
+    return null; // Clean up overlay leaving zero blank space!
   }
 
   return (
     <div 
-      className={`royal-door-overlay ${isOpeningAnim ? 'doors-animating' : ''} ${isOpened ? 'doors-opened' : ''}`}
+      className={`royal-door-overlay ${isAnimating ? 'doors-animating' : ''}`}
       aria-label="Royal Palace Door Entrance"
     >
       <div className="door-viewport-container">
@@ -34,13 +37,14 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
         <div className="door-top-garland" aria-hidden="true" />
 
         {/* 3D Double Palace Doors */}
-        <div className={`royal-double-doors ${isOpeningAnim || isOpened ? 'doors-open' : ''}`}>
+        <div className={`royal-double-doors ${isAnimating ? 'doors-open' : ''}`}>
           {/* Left Door Leaf */}
           <div className="door-leaf door-leaf-left">
             <div 
               className="door-wood-texture" 
               style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} 
             />
+            <div className="door-shading-gradient" />
             <div className="door-inner-shadow" />
           </div>
 
@@ -50,12 +54,13 @@ export function Opening({ isOpened, isOpeningAnim, onOpenDoors }) {
               className="door-wood-texture" 
               style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} 
             />
+            <div className="door-shading-gradient" />
             <div className="door-inner-shadow" />
           </div>
         </div>
 
         {/* Center Invitation Message & CTA (Fades out when opening) */}
-        <div className={`door-center-overlay ${isOpeningAnim || isOpened ? 'overlay-faded' : ''}`}>
+        <div className={`door-center-overlay ${isAnimating ? 'overlay-faded' : ''}`}>
           <p className="door-supertitle">{weddingConfig.doorSuperTitle}</p>
           <h1 className="door-headline">{weddingConfig.doorHeadline}</h1>
           <p className="door-subheadline">{weddingConfig.doorSubheadline}</p>

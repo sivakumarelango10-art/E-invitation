@@ -18,22 +18,26 @@ export default function App() {
   const [isOpeningAnim, setIsOpeningAnim] = useState(false);
   const { isPlaying, toggleMusic, startMelody } = useAudio();
 
-  // Initialize scroll reveal triggers
-  useIntersectionObserver('.reveal-init', { threshold: 0.15 });
+  // Initialize ultra-smooth scroll reveal triggers with reactive state
+  useIntersectionObserver('.reveal-init', { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }, [isOpened]);
 
   const handleOpenDoors = () => {
     setIsOpeningAnim(true);
 
-    // Start ambient background celebration melody
+    // Softly start celebration music upon door touch
     if (!isPlaying) {
       startMelody();
     }
 
-    // After 3D door swing completes, mark as opened
+    // Step 1: Doors start opening smoothly, mount downstream chapters
     setTimeout(() => {
       setIsOpened(true);
+    }, 600);
+
+    // Step 2: Once door swing is complete, finish animation and cleanup overlay
+    setTimeout(() => {
       setIsOpeningAnim(false);
-    }, 1400);
+    }, 2200);
   };
 
   return (
@@ -64,7 +68,7 @@ export default function App() {
         {/* 2. Primary Top Screen: Temple Sanctum Reveal */}
         <InvitationReveal />
 
-        {/* 3-8. Unfolding Invitation Chapters */}
+        {/* 3-8. Unfolding Invitation Chapters with Smooth Scrolling */}
         {(isOpened || isOpeningAnim) && (
           <div className="invitation-story-unfolded">
             {/* 3. Interactive Special Date (3 Scratch Hearts in Triangle Layout) */}
