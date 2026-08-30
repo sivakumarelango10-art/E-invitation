@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { weddingConfig } from '../config/weddingConfig';
 import { MandalaMotif, CornerFlourish, FloralDivider } from './OrnamentMotif';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
-export function Opening({ onOpenInvitation }) {
+export function Opening({ isOpened, isOpeningAnim, onOpenInvitation }) {
   const [loadStage, setLoadStage] = useState(0);
 
   useEffect(() => {
@@ -25,8 +26,25 @@ export function Opening({ onOpenInvitation }) {
     };
   }, []);
 
+  const handleButtonClick = () => {
+    try {
+      confetti({
+        particleCount: 50,
+        spread: 80,
+        origin: { y: 0.7 },
+        colors: ['#D4AF37', '#C5A880', '#F5ECE0', '#A9834F', '#FFFFFF'],
+        disableForReducedMotion: true
+      });
+    } catch {}
+    onOpenInvitation();
+  };
+
   return (
-    <section id="opening" className="invitation-section opening-section" aria-label="Wedding Invitation Cover">
+    <section 
+      id="opening" 
+      className={`invitation-section opening-section ${isOpeningAnim ? 'opening-pulse-active' : ''}`} 
+      aria-label="Wedding Invitation Cover"
+    >
       <div className="paper-texture" />
       
       {/* Gilded Border Frame */}
@@ -114,15 +132,30 @@ export function Opening({ onOpenInvitation }) {
             transition: 'all 0.8s var(--ease-cinematic)'
           }}
         >
-          <button 
-            type="button"
-            className="btn-open-invitation touch-press"
-            onClick={onOpenInvitation}
-            aria-label="Open Wedding Invitation"
-          >
-            <span>Open Invitation</span>
-            <ChevronDown />
-          </button>
+          {!isOpened ? (
+            <button 
+              type="button"
+              className={`btn-open-invitation touch-press ${isOpeningAnim ? 'anim-seal-glow' : ''}`}
+              onClick={handleButtonClick}
+              aria-label="Open Wedding Invitation"
+            >
+              <Sparkles style={{ width: '15px', height: '15px', color: 'var(--gold-vibrant)' }} />
+              <span>Open Invitation</span>
+              <ChevronDown />
+            </button>
+          ) : (
+            <button 
+              type="button"
+              className="btn-scroll-continue touch-press"
+              onClick={() => {
+                const revealEl = document.getElementById('reveal');
+                if (revealEl) revealEl.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span>Scroll to Explore</span>
+              <ChevronDown style={{ width: '14px', height: '14px' }} />
+            </button>
+          )}
         </div>
       </div>
     </section>

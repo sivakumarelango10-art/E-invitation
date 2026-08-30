@@ -58,6 +58,55 @@
   }
 }
 
+/* Luxury Unfolding Envelope / Invitation Transition */
+@keyframes invitationUnfold {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.965);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translateY(-3px) scale(1.004);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes goldGlowRay {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 0.85;
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+@keyframes sealPopGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px 12px rgba(212, 175, 55, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
 @keyframes lineDrawVertical {
   0% {
     transform: scaleY(0);
