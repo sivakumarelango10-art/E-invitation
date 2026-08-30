@@ -1,51 +1,37 @@
 import React from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { MandalaMotif, FloralDivider } from './OrnamentMotif';
+import { ChevronDown } from 'lucide-react';
 
 export function InvitationReveal() {
   return (
-    <section id="reveal" className="invitation-section reveal-section" aria-label="Formal Wedding Invitation Reveal">
-      <div className="paper-texture" />
-      
-      {/* Top Blessing Lead */}
-      <div className="reveal-header reveal-init stagger-1">
-        <div style={{ color: 'var(--gold-deep)', display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-          <MandalaMotif size={32} />
-        </div>
-        <p className="reveal-intro-text">{weddingConfig.revealHeadline}</p>
-        <h2 className="reveal-invitation-lead">{weddingConfig.revealSubheadline}</h2>
+    <section id="reveal" className="sanctum-reveal-section" aria-label="Wedding Couple Reveal">
+      {/* Temple Gopuram Backdrop */}
+      <div 
+        className="sanctum-backdrop-image"
+        style={{ backgroundImage: `url(${weddingConfig.revealBackdrop})` }}
+      >
+        <div className="sanctum-gradient-overlay" />
       </div>
 
-      {/* Intimate Reveal Portrait */}
-      <div className="reveal-portrait-card reveal-init stagger-2">
-        <div className="reveal-image-wrapper">
-          <img 
-            src={weddingConfig.revealImage} 
-            alt={`${weddingConfig.brideName} and ${weddingConfig.groomName} in regal wedding attire`}
-            loading="lazy"
-          />
-        </div>
-      </div>
+      {/* Floating Typography Content */}
+      <div className="sanctum-content-container reveal-init stagger-1">
+        <p className="sanctum-supertitle">{weddingConfig.revealSuperTitle}</p>
+        <p className="sanctum-tagline">{weddingConfig.revealTagline}</p>
 
-      {/* Couple Formal Names with Parentage */}
-      <div className="reveal-names-block reveal-init stagger-3">
-        <div className="bride-block">
-          <h3 className="reveal-name">{weddingConfig.brideFullName}</h3>
-          <p className="reveal-parentage">{weddingConfig.brideParents}</p>
+        <div className="sanctum-couple-names">
+          <h2 className="sanctum-name">{weddingConfig.brideName}</h2>
+          <span className="sanctum-weds-tag">weds</span>
+          <h2 className="sanctum-name">{weddingConfig.groomName}</h2>
         </div>
 
-        <span className="reveal-ampersand-sign">&</span>
+        <p className="sanctum-date-badge">
+          {weddingConfig.weddingDay} {weddingConfig.weddingMonth} {weddingConfig.weddingYear}
+        </p>
 
-        <div className="groom-block">
-          <h3 className="reveal-name">{weddingConfig.groomFullName}</h3>
-          <p className="reveal-parentage">{weddingConfig.groomParents}</p>
+        <div className="sanctum-scroll-hint">
+          <span>{weddingConfig.revealFooter}</span>
+          <ChevronDown className="sanctum-bounce-arrow" />
         </div>
-      </div>
-
-      {/* Footer Quote */}
-      <div className="reveal-init stagger-4" style={{ width: '100%' }}>
-        <FloralDivider />
-        <p className="reveal-footer-quote">“{weddingConfig.revealFooter}”</p>
       </div>
     </section>
   );

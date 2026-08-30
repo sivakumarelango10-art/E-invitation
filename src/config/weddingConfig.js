@@ -1,132 +1,124 @@
 export const weddingConfig = {
   // Couple Information
-  brideName: "Ananya",
-  brideFullName: "Ananya Sharma",
+  brideName: "Mahalakshmi",
+  brideFullName: "Mahalakshmi Sharma",
   brideParents: "Daughter of Mrs. Sunita & Mr. Rajesh Sharma",
-  groomName: "Kabir",
-  groomFullName: "Kabir Singhania",
+  groomName: "Dhilip Kumar",
+  groomFullName: "Dhilip Kumar Singhania",
   groomParents: "Son of Mrs. Meenakshi & Mr. Vikram Singhania",
   
   // Date & Time
   weddingDate: "2026-11-22T09:00:00+05:30",
   weddingDay: "22",
-  weddingMonth: "NOVEMBER",
+  weddingMonth: "NOV",
   weddingYear: "2026",
-  weddingDayOfWeek: "SUNDAY",
+  weddingDayOfWeek: "Sunday",
   
-  // Hero & Intro
-  introSuperTitle: "A LITTLE PIECE OF FOREVER",
-  introTagline: "Step into our beautiful beginning",
-  heroImage: "/assets/images/hero_couple.jpg",
-  heroInvitationMessage: "Together with our families, we invite you to share in our joy as we exchange our vows.",
+  // Door Opening Cover
+  doorImage: "/assets/images/royal_doors.webp",
+  doorSuperTitle: "With all our hearts",
+  doorHeadline: "You are invited",
+  doorSubheadline: "to celebrate with us",
+  doorButtonText: "OPEN INVITATION",
+  doorHintText: "Tap to open the doors",
   
-  // Reveal Section
-  revealImage: "/assets/images/reveal_couple.jpg",
-  revealHeadline: "With all our hearts",
-  revealSubheadline: "We invite you to celebrate",
-  revealFooter: "as we begin our forever together",
+  // Reveal Section (Temple Backdrop)
+  revealBackdrop: "/assets/images/temple_backdrop.webp",
+  revealSuperTitle: "TOGETHER WITH OUR FAMILIES",
+  revealTagline: "WE INVITE YOU TO CELEBRATE OUR FOREVER",
+  revealFooter: "SCROLL TO DISCOVER OUR STORY",
   
-  // Interactive Special Date
-  dateTitle: "OUR SPECIAL DATE",
+  // Interactive Special Date (Three Hearts)
+  dateTitle: "Our Special Date",
   dateSubtitle: "A little touch reveals the date",
+  dateHint: "✦ Reveal each heart to discover the date ✦",
   dateEpilogue: "And so, our forever begins...",
   
   // Timeline Itinerary
-  timelineTitle: "WEDDING TIMELINE",
-  timelineSubtitle: "Two beautiful moments, one unforgettable beginning.",
+  timelineTitle: "Wedding Timeline",
+  timelineSubtitle: "Three moments, one beautiful celebration",
   timelineEvents: [
     {
       id: "event-sangeet",
-      dateBadge: "21 NOV",
-      dayName: "Saturday",
-      title: "The Sangeet & Musical Soirée",
-      time: "06:30 PM Onwards",
-      venueNote: "The Courtyard of Lamps",
-      attire: "Traditional Regal & Festive",
-      description: "An evening of music, dance, laughter, and celebrated togetherness under starlit skies."
+      dateDay: "21",
+      dateMonth: "NOV",
+      dateYear: "2026",
+      title: "Sangeet",
+      time: "8:00 PM - 11:00 PM",
+      venueNote: "The Courtyard of Lamps"
     },
     {
-      id: "event-ceremony",
-      dateBadge: "22 NOV",
-      dayName: "Sunday Morning",
-      title: "The Vedic Vivaha & Varmala",
-      time: "09:00 AM Auspicious Muhurat",
-      venueNote: "The Lotus Mandap Pavilion",
-      attire: "Pastel Elegance / Traditional",
-      description: "The sacred union, seven sacred circumambulations, and exchange of floral garlands."
+      id: "event-marriage",
+      dateDay: "22",
+      dateMonth: "NOV",
+      dateYear: "2026",
+      title: "Marriage",
+      time: "9:00 AM - 10:30 AM",
+      venueNote: "The Lotus Mandap Pavilion"
     },
     {
       id: "event-reception",
-      dateBadge: "22 NOV",
-      dayName: "Sunday Evening",
-      title: "The Evening Royal Reception",
-      time: "07:30 PM Onwards",
-      venueNote: "The Grand Palace Ballroom & Lawns",
-      attire: "Formal Indian / Black Tie Optional",
-      description: "A celebratory banquet dinner with speeches, toasts, and heartfelt blessings."
+      dateDay: "22",
+      dateMonth: "NOV",
+      dateYear: "2026",
+      title: "Evening Reception",
+      time: "7:00 PM - 10:00 PM",
+      venueNote: "The Grand Palace Ballroom"
     }
   ],
   
   // Venue
-  venueSectionTitle: "THE VENUE",
-  venueName: "The Grand Heritage Palace",
-  venueSubName: "Lake Pichola Complex",
-  venueAddress: "Pichola Heritage Precinct, Udaipur, Rajasthan 313001",
-  venueCityState: "Udaipur, Rajasthan — India",
-  venueImage: "/assets/images/venue_palace.jpg",
-  mapsUrl: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
-  venuePhone: "+91 294 246 8000",
+  venueSectionTitle: "VENUE",
+  venueName: "Mangal Akshatha Wedding Hall",
+  venueAddress: "Mettupalayam Main Rd, Heritage Precinct",
+  mapsUrl: "https://maps.google.com/?q=Mangal+Akshatha+Wedding+Hall",
   
   // Countdown
-  countdownTitle: "COUNTING DOWN TO FOREVER",
-  countdownSubtitle: "Every second brings us closer to celebrating together.",
+  countdownSuperTitle: "THE BIG DAY IS GETTING CLOSER",
+  countdownTitle: "Counting Down to Forever",
+  countdownSubtitle: "Every second brings us closer to celebrating with you.",
+  countdownDateLabel: "22 November 2026 • 9:00 AM",
   
-  // Memories Gallery
-  memoriesTitle: "A LITTLE MORE OF US",
-  memoriesSubtitle: "A little piece of our story.",
+  // Memories / Polaroid Gallery
+  memoriesSuperTitle: "OUR MOMENTS",
+  memoriesTitle: "Little pieces of forever",
+  memoriesSubtitle: "Swipe left or right through our favorite memories",
   galleryImages: [
     {
       url: "/assets/images/gallery_sangeet.jpg",
-      title: "A Symphony of Joy",
-      tag: "Sangeet Night",
-      caption: "Dancing under a canopy of warm fairy lights, surrounded by family and love."
-    },
-    {
-      url: "/assets/images/gallery_haldi.jpg",
-      title: "Golden Sunbeams",
-      tag: "Haldi Celebration",
-      caption: "Drenched in laughter, fragrant turmeric, and bright marigold flower showers."
-    },
-    {
-      url: "/assets/images/gallery_mandap.jpg",
-      title: "Sacred Promises",
-      tag: "The Varmala",
-      caption: "Two souls whispering eternal vows by the sacred fire and lotus petals."
-    },
-    {
-      url: "/assets/images/gallery_sunset.jpg",
-      title: "Hand in Hand",
-      tag: "Palace Twilight",
-      caption: "Walking into a lifetime of sunsets, dreams, and quiet warmth together."
+      webp: "/assets/images/gallery_sangeet.webp",
+      caption: "A little laughter, a lot of love."
     },
     {
       url: "/assets/images/reveal_couple.jpg",
-      title: "Our Quiet Beginning",
-      tag: "Forever Yours",
-      caption: "Every love story is special, but ours is our absolute favorite."
+      webp: "/assets/images/reveal_couple.webp",
+      caption: "Where two hearts found their forever."
+    },
+    {
+      url: "/assets/images/gallery_sunset.jpg",
+      webp: "/assets/images/gallery_sunset.webp",
+      caption: "Together feels like home."
+    },
+    {
+      url: "/assets/images/gallery_haldi.jpg",
+      webp: "/assets/images/gallery_haldi.webp",
+      caption: "Every moment becomes a memory."
+    },
+    {
+      url: "/assets/images/gallery_mandap.jpg",
+      webp: "/assets/images/gallery_mandap.webp",
+      caption: "And the journey begins, hand in hand."
     }
   ],
   
   // Final Message / Blessing
-  closingSalutation: "DEAR GUEST,",
-  closingParagraph1: "Your presence is the most beautiful gift we could ask for.",
-  closingParagraph2: "Come with your smiles, your blessings, and your warm happiness.",
-  closingParagraph3: "Let us make this beautiful day a memory we will cherish for all of our lives.",
-  closingSignOff: "With boundless love & gratitude,",
-  closingDateFormatted: "Sunday, November 22, 2026",
-  
-  // Social & RSVP
-  hashtag: "#AnanyaWedsKabir",
-  rsvpPhone: "+91 98765 43210",
-  rsvpEmail: "celebrate@ananya-kabir.wedding"
+  closingSuperTitle: "A LITTLE NOTE FOR YOU",
+  closingSalutation: "Dear Guest",
+  closingParagraph1: "“Your presence is the most beautiful gift we could ask for.”",
+  closingParagraph2: "Come with your smiles, your blessings and your happiest hearts.",
+  closingParagraph3: "Let us make this beautiful day a memory we will cherish forever.",
+  closingSignOff: "With love,",
+  closingDateFormatted: "22 NOVEMBER 2026",
+  instagramTag: "@craft_and_celebrate",
+  hashtag: "#MahalakshmiWedsDhilip"
 };

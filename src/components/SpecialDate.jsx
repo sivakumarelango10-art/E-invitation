@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { FloralDivider } from './OrnamentMotif';
 import { ScratchHeart } from './ScratchHeart';
-import { Sparkles, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export function SpecialDate() {
@@ -24,110 +22,77 @@ export function SpecialDate() {
         try {
           confetti({
             particleCount: 60,
-            spread: 70,
+            spread: 75,
             origin: { y: 0.6 },
-            colors: ['#D4AF37', '#C5A880', '#F5ECE0', '#A9834F', '#FFFFFF'],
+            colors: ['#FFB703', '#FB8500', '#D4AF37', '#E9D8A6', '#FFFFFF'],
             disableForReducedMotion: true
           });
         } catch {}
-      }, 350);
+      }, 300);
     }
-  };
-
-  const handleRevealAll = () => {
-    setRevealed({ day: true, month: true, year: true });
-    try {
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.6 },
-        colors: ['#D4AF37', '#C5A880', '#F5ECE0', '#A9834F']
-      });
-    } catch {}
   };
 
   const allRevealed = revealed.day && revealed.month && revealed.year;
 
   return (
-    <section id="date" className="invitation-section auto-height special-date-section" aria-label="Interactive Wedding Date Reveal">
+    <section id="date" className="invitation-section auto-height special-date-ref-section" aria-label="Our Special Date">
       <div className="paper-texture" />
       
-      {/* Section Header */}
+      {/* Header */}
       <div className="reveal-init stagger-1">
-        <p className="section-supertitle">Save The Date</p>
-        <h2 className="section-title">{weddingConfig.dateTitle}</h2>
-        <p className="section-subtitle">
-          Scratch each gold heart to reveal our sacred wedding date
-        </p>
-        <FloralDivider />
+        <h2 className="special-date-ref-title">{weddingConfig.dateTitle}</h2>
+        <p className="special-date-ref-subtitle">{weddingConfig.dateSubtitle}</p>
       </div>
 
-      {/* 3 Luxury Scratch Hearts */}
-      <div className="scratch-hearts-collection reveal-init stagger-2">
-        {/* Heart 1: DAY */}
-        <div className="scratch-heart-wrapper">
-          <ScratchHeart
-            label="THE DAY"
-            value={weddingConfig.weddingDay}
-            sublabel="Sunday Morning"
-            isRevealed={revealed.day}
-            onReveal={() => handleHeartReveal('day')}
-            width={240}
-            height={205}
-          />
+      {/* 3 Gold Hearts (2 Top, 1 Bottom Inverted Triangle Layout) */}
+      <div className="ref-hearts-triangle-grid reveal-init stagger-2">
+        {/* Top Row: DATE & MONTH */}
+        <div className="ref-hearts-top-row">
+          <div className="ref-heart-col">
+            <ScratchHeart
+              label="DATE"
+              value={weddingConfig.weddingDay}
+              isRevealed={revealed.day}
+              onReveal={() => handleHeartReveal('day')}
+              width={145}
+              height={130}
+            />
+            <span className="ref-heart-bottom-tag">DATE</span>
+          </div>
+
+          <div className="ref-heart-col">
+            <ScratchHeart
+              label="MONTH"
+              value={weddingConfig.weddingMonth}
+              isRevealed={revealed.month}
+              onReveal={() => handleHeartReveal('month')}
+              width={145}
+              height={130}
+            />
+            <span className="ref-heart-bottom-tag">MONTH</span>
+          </div>
         </div>
 
-        {/* Connecting Ornamental Divider */}
-        <div className="heart-chain-node" aria-hidden="true">
-          <Heart style={{ width: '12px', height: '12px', fill: 'currentColor' }} />
-        </div>
-
-        {/* Heart 2: MONTH */}
-        <div className="scratch-heart-wrapper">
-          <ScratchHeart
-            label="THE MONTH"
-            value={weddingConfig.weddingMonth}
-            sublabel="Auspicious Muhurat"
-            isRevealed={revealed.month}
-            onReveal={() => handleHeartReveal('month')}
-            width={240}
-            height={205}
-          />
-        </div>
-
-        {/* Connecting Ornamental Divider */}
-        <div className="heart-chain-node" aria-hidden="true">
-          <Heart style={{ width: '12px', height: '12px', fill: 'currentColor' }} />
-        </div>
-
-        {/* Heart 3: YEAR */}
-        <div className="scratch-heart-wrapper">
-          <ScratchHeart
-            label="THE YEAR"
-            value={weddingConfig.weddingYear}
-            sublabel="MMXXVI"
-            isRevealed={revealed.year}
-            onReveal={() => handleHeartReveal('year')}
-            width={240}
-            height={205}
-          />
+        {/* Bottom Center: YEAR */}
+        <div className="ref-hearts-bottom-row">
+          <div className="ref-heart-col">
+            <ScratchHeart
+              label="YEAR"
+              value={weddingConfig.weddingYear}
+              isRevealed={revealed.year}
+              onReveal={() => handleHeartReveal('year')}
+              width={145}
+              height={130}
+            />
+            <span className="ref-heart-bottom-tag">YEAR</span>
+          </div>
         </div>
       </div>
 
-      {/* Quick Reveal Helper Button */}
-      {!allRevealed && (
-        <div className="reveal-all-bar reveal-init stagger-3">
-          <button 
-            type="button" 
-            className="btn-reveal-all touch-press"
-            onClick={handleRevealAll}
-            aria-label="Reveal all dates at once"
-          >
-            <Sparkles style={{ width: '13px', height: '13px' }} />
-            <span>Scratch All at Once</span>
-          </button>
-        </div>
-      )}
+      {/* Subtext Prompt */}
+      <div className="reveal-init stagger-3">
+        <p className="ref-hearts-hint">{weddingConfig.dateHint}</p>
+      </div>
 
       {/* Romantic Epilogue Toast */}
       {allRevealed && (

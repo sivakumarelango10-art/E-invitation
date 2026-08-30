@@ -1,161 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { MandalaMotif, CornerFlourish, FloralDivider } from './OrnamentMotif';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export function Opening({ isOpened, isOpeningAnim, onOpenInvitation }) {
-  const [loadStage, setLoadStage] = useState(0);
+  const handleOpenDoors = () => {
+    if (isOpeningAnim || isOpened) return;
 
-  useEffect(() => {
-    // Choreographed progressive reveal timeline
-    const t1 = setTimeout(() => setLoadStage(1), 100);  // Frame & motif
-    const t2 = setTimeout(() => setLoadStage(2), 350);  // Arch photo
-    const t3 = setTimeout(() => setLoadStage(3), 650);  // Supertitle & tagline
-    const t4 = setTimeout(() => setLoadStage(4), 950);  // Couple names
-    const t5 = setTimeout(() => setLoadStage(5), 1250); // Invitation message
-    const t6 = setTimeout(() => setLoadStage(6), 1550); // CTA Button
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-      clearTimeout(t5);
-      clearTimeout(t6);
-    };
-  }, []);
-
-  const handleButtonClick = () => {
+    // Trigger golden and marigold petals confetti
     try {
       confetti({
         particleCount: 50,
         spread: 80,
-        origin: { y: 0.7 },
-        colors: ['#D4AF37', '#C5A880', '#F5ECE0', '#A9834F', '#FFFFFF'],
+        origin: { y: 0.6 },
+        colors: ['#FFB703', '#FB8500', '#D4AF37', '#E9D8A6', '#FFFFFF'],
         disableForReducedMotion: true
       });
     } catch {}
+
     onOpenInvitation();
   };
 
   return (
-    <section 
-      id="opening" 
-      className={`invitation-section opening-section ${isOpeningAnim ? 'opening-pulse-active' : ''}`} 
-      aria-label="Wedding Invitation Cover"
-    >
-      <div className="paper-texture" />
-      
-      {/* Gilded Border Frame */}
-      <div 
-        className="opening-border-frame" 
-        style={{
-          opacity: loadStage >= 1 ? 1 : 0,
-          transform: loadStage >= 1 ? 'scale(1)' : 'scale(0.96)',
-          transition: 'all 1.1s var(--ease-cinematic)'
-        }}
-      >
-        <CornerFlourish position="top-left" className="corner-decor" />
-        <CornerFlourish position="top-right" className="corner-decor" />
-        <CornerFlourish position="bottom-left" className="corner-decor" />
-        <CornerFlourish position="bottom-right" className="corner-decor" />
-      </div>
+    <section id="opening" className="royal-door-section" aria-label="Royal Wedding Palace Door Opening">
+      <div className="door-viewport-container">
+        {/* Top Marigold Garland Toran */}
+        <div className="door-top-garland" aria-hidden="true" />
 
-      {/* Top Header Block */}
-      <div 
-        className="opening-header"
-        style={{
-          opacity: loadStage >= 3 ? 1 : 0,
-          transform: loadStage >= 3 ? 'translateY(0)' : 'translateY(15px)',
-          transition: 'all 0.9s var(--ease-cinematic)'
-        }}
-      >
-        <div style={{ color: 'var(--gold-primary)', display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-          <MandalaMotif size={28} />
-        </div>
-        <p className="opening-supertitle">{weddingConfig.introSuperTitle}</p>
-        <p className="opening-tagline">{weddingConfig.introTagline}</p>
-      </div>
+        {/* 3D Double Palace Doors */}
+        <div className={`royal-double-doors ${isOpened || isOpeningAnim ? 'doors-open' : ''}`}>
+          {/* Left Door Leaf */}
+          <div className="door-leaf door-leaf-left">
+            <div className="door-wood-texture" style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} />
+            <div className="door-brass-knocker knocker-left" />
+            <div className="door-inner-shadow" />
+          </div>
 
-      {/* Center Arch Photograph */}
-      <div 
-        className="opening-photo-container"
-        style={{
-          opacity: loadStage >= 2 ? 1 : 0,
-          transform: loadStage >= 2 ? 'scale(1) translateY(0)' : 'scale(0.97) translateY(18px)',
-          transition: 'all 1.1s var(--ease-cinematic)'
-        }}
-      >
-        <div className="opening-photo-arch">
-          <img 
-            src={weddingConfig.heroImage} 
-            alt={`${weddingConfig.brideName} and ${weddingConfig.groomName}`} 
-            loading="eager"
-          />
-        </div>
-      </div>
-
-      {/* Couple Names & Invitation Message */}
-      <div className="opening-bottom-content">
-        <div 
-          className="opening-couple-names"
-          style={{
-            opacity: loadStage >= 4 ? 1 : 0,
-            transform: loadStage >= 4 ? 'translateY(0)' : 'translateY(12px)',
-            transition: 'all 0.9s var(--ease-cinematic)'
-          }}
-        >
-          <h1>
-            {weddingConfig.brideName}
-            <span className="ampersand">&</span>
-            {weddingConfig.groomName}
-          </h1>
+          {/* Right Door Leaf */}
+          <div className="door-leaf door-leaf-right">
+            <div className="door-wood-texture" style={{ backgroundImage: `url(${weddingConfig.doorImage})` }} />
+            <div className="door-brass-knocker knocker-right" />
+            <div className="door-inner-shadow" />
+          </div>
         </div>
 
-        <div 
-          style={{
-            opacity: loadStage >= 5 ? 1 : 0,
-            transform: loadStage >= 5 ? 'translateY(0)' : 'translateY(10px)',
-            transition: 'all 0.9s var(--ease-cinematic)'
-          }}
-        >
-          <FloralDivider />
-          <p className="opening-invitation-msg">{weddingConfig.heroInvitationMessage}</p>
-        </div>
+        {/* Center Invitation Message & CTA (Fades out when opening) */}
+        <div className={`door-center-overlay ${isOpened || isOpeningAnim ? 'overlay-faded' : ''}`}>
+          <p className="door-supertitle">{weddingConfig.doorSuperTitle}</p>
+          <h1 className="door-headline">{weddingConfig.doorHeadline}</h1>
+          <p className="door-subheadline">{weddingConfig.doorSubheadline}</p>
 
-        {/* CTA Button */}
-        <div 
-          style={{
-            opacity: loadStage >= 6 ? 1 : 0,
-            transform: loadStage >= 6 ? 'translateY(0)' : 'translateY(10px)',
-            transition: 'all 0.8s var(--ease-cinematic)'
-          }}
-        >
-          {!isOpened ? (
-            <button 
-              type="button"
-              className={`btn-open-invitation touch-press ${isOpeningAnim ? 'anim-seal-glow' : ''}`}
-              onClick={handleButtonClick}
-              aria-label="Open Wedding Invitation"
-            >
-              <Sparkles style={{ width: '15px', height: '15px', color: 'var(--gold-vibrant)' }} />
-              <span>Open Invitation</span>
-              <ChevronDown />
-            </button>
-          ) : (
-            <button 
-              type="button"
-              className="btn-scroll-continue touch-press"
-              onClick={() => {
-                const revealEl = document.getElementById('reveal');
-                if (revealEl) revealEl.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              <span>Scroll to Explore</span>
-              <ChevronDown style={{ width: '14px', height: '14px' }} />
-            </button>
-          )}
+          <button 
+            type="button"
+            className="btn-door-open touch-press"
+            onClick={handleOpenDoors}
+            aria-label="Open Invitation Doors"
+          >
+            <Sparkles style={{ width: '16px', height: '16px', color: '#D4AF37' }} />
+            <span>{weddingConfig.doorButtonText}</span>
+          </button>
+
+          <p className="door-tap-hint">{weddingConfig.doorHintText}</p>
         </div>
       </div>
     </section>

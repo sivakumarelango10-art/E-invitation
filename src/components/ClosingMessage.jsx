@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { MandalaMotif, FloralDivider, CornerFlourish } from './OrnamentMotif';
 import { Heart, Send, X, CheckCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -21,7 +20,7 @@ export function ClosingMessage() {
         particleCount: 50,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#D4AF37', '#C5A880', '#FFFFFF', '#A9834F']
+        colors: ['#FFB703', '#D4AF37', '#FFFFFF', '#A9834F']
       });
     } catch {}
 
@@ -34,55 +33,42 @@ export function ClosingMessage() {
   };
 
   return (
-    <footer id="closing" className="invitation-section closing-section" aria-label="Final Blessing and RSVP">
-      {/* Outer Gilded Frame */}
-      <div className="closing-border-frame">
-        <CornerFlourish position="top-left" className="corner-decor" />
-        <CornerFlourish position="top-right" className="corner-decor" />
-        <CornerFlourish position="bottom-left" className="corner-decor" />
-        <CornerFlourish position="bottom-right" className="corner-decor" />
-      </div>
+    <footer id="closing" className="invitation-section auto-height closing-ref-section" aria-label="Closing Blessing">
+      {/* Dark Luxury Arched Card */}
+      <div className="closing-ref-card reveal-init stagger-1">
+        <p className="closing-ref-supertitle">{weddingConfig.closingSuperTitle}</p>
+        <h2 className="closing-ref-salutation">{weddingConfig.closingSalutation}</h2>
 
-      {/* Top Ornament */}
-      <div className="reveal-init stagger-1" style={{ color: 'var(--gold-primary)', marginBottom: '16px' }}>
-        <MandalaMotif size={36} />
-      </div>
+        <div className="closing-ref-quote-box">
+          <p>{weddingConfig.closingParagraph1}</p>
+          <p>{weddingConfig.closingParagraph2}</p>
+          <p>{weddingConfig.closingParagraph3}</p>
+        </div>
 
-      {/* Salutation */}
-      <div className="reveal-init stagger-2">
-        <h2 className="closing-salutation">{weddingConfig.closingSalutation}</h2>
-      </div>
+        <div className="closing-ref-signature-block">
+          <p className="closing-ref-signoff">{weddingConfig.closingSignOff}</p>
+          <h3 className="closing-ref-couple-names">
+            {weddingConfig.brideName} & {weddingConfig.groomName}
+          </h3>
+        </div>
 
-      {/* Heartfelt Message Body */}
-      <div className="closing-message-body reveal-init stagger-3">
-        <p>{weddingConfig.closingParagraph1}</p>
-        <p>{weddingConfig.closingParagraph2}</p>
-        <p>{weddingConfig.closingParagraph3}</p>
-      </div>
+        <div className="closing-ref-bottom-bar">
+          <p className="closing-ref-date-tag">{weddingConfig.closingDateFormatted}</p>
+          <p className="closing-ref-instagram-tag">{weddingConfig.instagramTag}</p>
+        </div>
 
-      {/* Couple Signatures */}
-      <div className="reveal-init stagger-4">
-        <FloralDivider />
-        <p className="closing-signoff-lead">{weddingConfig.closingSignOff}</p>
-        <h3 className="closing-couple-names">
-          {weddingConfig.brideName} & {weddingConfig.groomName}
-        </h3>
-        <p className="closing-date-badge">{weddingConfig.closingDateFormatted}</p>
-      </div>
-
-      {/* RSVP Action */}
-      <div className="closing-actions reveal-init stagger-5">
-        <button 
-          type="button" 
-          className="btn-rsvp-celebrate touch-press"
-          onClick={() => setShowRsvpModal(true)}
-          aria-label="Send RSVP and Blessings"
-        >
-          <Heart style={{ fill: 'currentColor' }} />
-          <span>Send Your Blessings & RSVP</span>
-        </button>
-
-        <p className="wedding-hashtag-pill">{weddingConfig.hashtag}</p>
+        {/* RSVP Button */}
+        <div style={{ marginTop: '20px' }}>
+          <button 
+            type="button" 
+            className="btn-rsvp-ref touch-press"
+            onClick={() => setShowRsvpModal(true)}
+            aria-label="Send RSVP"
+          >
+            <Heart style={{ width: '14px', height: '14px', fill: 'currentColor' }} />
+            <span>Send Your Blessings & RSVP</span>
+          </button>
+        </div>
       </div>
 
       {/* RSVP Modal */}
@@ -145,7 +131,7 @@ export function ClosingMessage() {
                       id="guestMessage"
                       className="rsvp-input" 
                       rows="3"
-                      placeholder="Share a heartfelt note with Ananya & Kabir..."
+                      placeholder="Share a heartfelt note with the couple..."
                       value={guestMessage}
                       onChange={(e) => setGuestMessage(e.target.value)}
                     />

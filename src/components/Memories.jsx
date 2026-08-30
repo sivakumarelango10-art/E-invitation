@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { FloralDivider } from './OrnamentMotif';
-import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { PhotoViewer } from './PhotoViewer';
 
 export function Memories() {
@@ -11,13 +10,10 @@ export function Memories() {
   const isDraggingRef = useRef(false);
   const totalPhotos = weddingConfig.galleryImages.length;
 
-  // Preload all gallery images immediately for instant 0ms switching
   useEffect(() => {
     weddingConfig.galleryImages.forEach((photo) => {
       const img = new Image();
-      img.src = photo.url.replace(/\.jpg$/, '.webp');
-      const fallback = new Image();
-      fallback.src = photo.url;
+      img.src = photo.webp || photo.url;
     });
   }, []);
 
@@ -29,7 +25,6 @@ export function Memories() {
     setCurrentIndex((prev) => (prev - 1 + totalPhotos) % totalPhotos);
   };
 
-  // Touch Swipe Handlers (Passive-friendly on slider track)
   const handleTouchStart = (e) => {
     touchStartXRef.current = e.touches[0].clientX;
     isDraggingRef.current = true;
@@ -40,114 +35,87 @@ export function Memories() {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartXRef.current - touchEndX;
 
-    if (diff > 45) {
+    if (diff > 40) {
       handleNext();
-    } else if (diff < -45) {
+    } else if (diff < -40) {
       handlePrev();
     }
     touchStartXRef.current = null;
     isDraggingRef.current = false;
   };
 
-  const activePhoto = weddingConfig.galleryImages[currentIndex];
-
   return (
-    <section id="memories" className="invitation-section auto-height memories-section" aria-label="Wedding Memories & Gallery">
-      <div className="paper-texture" />
-      
+    <section id="memories" className="invitation-section auto-height memories-ref-section" aria-label="Our Moments">
       {/* Header */}
       <div className="reveal-init stagger-1">
-        <p className="section-supertitle">Cherished Moments</p>
-        <h2 className="section-title">{weddingConfig.memoriesTitle}</h2>
-        <p className="section-subtitle">{weddingConfig.memoriesSubtitle}</p>
-        <FloralDivider />
+        <p className="memories-ref-supertitle">{weddingConfig.memoriesSuperTitle}</p>
+        <h2 className="memories-ref-title">{weddingConfig.memoriesTitle}</h2>
+        <p className="memories-ref-subtitle">{weddingConfig.memoriesSubtitle}</p>
       </div>
 
-      {/* High-Performance Sliding Viewport */}
+      {/* Polaroid Slider Container */}
       <div 
-        className="memories-slider-wrapper reveal-init stagger-2"
+        className="memories-ref-slider-box reveal-init stagger-2"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="memories-viewport-frame">
-          {/* Continuous GPU-Accelerated Slider Track */}
+        <div className="polaroid-viewport-frame">
           <div 
-            className="memories-slider-track"
+            className="polaroid-slider-track"
             style={{ transform: `translate3d(-${currentIndex * 100}%, 0, 0)` }}
           >
-            {weddingConfig.galleryImages.map((photo, index) => {
-              const webpUrl = photo.url.replace(/\.jpg$/, '.webp');
-
-              return (
-                <div 
-                  key={photo.url}
-                  className="memories-slide-item"
-                  onClick={() => setLightboxPhoto(photo)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View photo ${index + 1} of ${totalPhotos}: ${photo.title}`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      setLightboxPhoto(photo);
-                    }
-                  }}
-                >
-                  <div className="memories-slide-card">
+            {weddingConfig.galleryImages.map((photo, index) => (
+              <div 
+                key={photo.url} 
+                className="polaroid-slide-item"
+                onClick={() => setLightboxPhoto(photo)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Photo ${index + 1}: ${photo.caption}`}
+              >
+                {/* Physical Polaroid Card */}
+                <div className="polaroid-card">
+                  <div className="polaroid-image-frame">
                     <picture>
-                      <source srcSet={webpUrl} type="image/webp" />
-                      <img 
-                        src={photo.url} 
-                        alt={photo.title}
-                        loading="eager"
-                        decoding="async"
-                      />
+                      <source srcSet={photo.webp} type="image/webp" />
+                      <img src={photo.url} alt={photo.caption} loading="eager" decoding="async" />
                     </picture>
-
-                    {/* Gradient Overlay with Captions */}
-                    <div className="memories-slide-overlay">
-                      <span className="memories-tag">{photo.tag}</span>
-                      <h3 className="memories-slide-title">{photo.title}</h3>
-                      <p className="memories-slide-caption">{photo.caption}</p>
-                      
-                      <div className="memories-maximize-badge">
-                        <Maximize2 style={{ width: '16px', height: '16px' }} />
-                      </div>
-                    </div>
                   </div>
+                  <p className="polaroid-handwriting-caption">{photo.caption}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Slider Controls Bar */}
-        <div className="memories-controls-bar">
-          <div className="memories-counter">
+        {/* Controls Bar (< 01 / 05 >) */}
+        <div className="polaroid-controls-bar">
+          <button 
+            type="button" 
+            className="btn-polaroid-arrow touch-press"
+            onClick={handlePrev}
+            aria-label="Previous Photo"
+          >
+            <ChevronLeft style={{ width: '16px', height: '16px' }} />
+          </button>
+
+          <span className="polaroid-counter-text">
             {String(currentIndex + 1).padStart(2, '0')} / {String(totalPhotos).padStart(2, '0')}
-          </div>
+          </span>
 
-          <div className="slider-nav-btns">
-            <button 
-              type="button" 
-              className="btn-slider-arrow touch-press"
-              onClick={handlePrev}
-              aria-label="Previous Photo"
-            >
-              <ChevronLeft />
-            </button>
-            <button 
-              type="button" 
-              className="btn-slider-arrow touch-press"
-              onClick={handleNext}
-              aria-label="Next Photo"
-            >
-              <ChevronRight />
-            </button>
-          </div>
+          <button 
+            type="button" 
+            className="btn-polaroid-arrow touch-press"
+            onClick={handleNext}
+            aria-label="Next Photo"
+          >
+            <ChevronRight style={{ width: '16px', height: '16px' }} />
+          </button>
         </div>
+
+        <p className="polaroid-swipe-hint">Swipe left / right - or tap the arrows</p>
       </div>
 
-      {/* Lightbox Modal */}
       {lightboxPhoto && (
         <PhotoViewer 
           photo={lightboxPhoto} 
