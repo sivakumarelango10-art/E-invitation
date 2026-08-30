@@ -18,30 +18,22 @@ export default function App() {
   const [isOpeningAnim, setIsOpeningAnim] = useState(false);
   const { isPlaying, toggleMusic, startMelody } = useAudio();
 
-  // Initialize scroll reveal triggers for unveiled elements
+  // Initialize scroll reveal triggers
   useIntersectionObserver('.reveal-init', { threshold: 0.15 });
 
-  const handleOpenInvitation = () => {
+  const handleOpenDoors = () => {
     setIsOpeningAnim(true);
 
-    // Start ambient background music upon intentional interaction
+    // Start ambient background celebration melody
     if (!isPlaying) {
       startMelody();
     }
 
-    // Unfold the remaining invitation chapters with choreographed timing
+    // After 3D door swing completes, mark as opened
     setTimeout(() => {
       setIsOpened(true);
-
-      // Smooth scroll to the formal Reveal section
-      setTimeout(() => {
-        const revealEl = document.getElementById('reveal');
-        if (revealEl) {
-          revealEl.scrollIntoView({ behavior: 'smooth' });
-        }
-        setIsOpeningAnim(false);
-      }, 200);
-    }, 450);
+      setIsOpeningAnim(false);
+    }, 1400);
   };
 
   return (
@@ -54,43 +46,43 @@ export default function App() {
         <MandalaMotif size={200} />
       </div>
 
-      {/* Floating Controls: Music & Chapter Navigation (Visible once opened or on top) */}
-      <div className={`fixed-floating-controls ${isOpened ? 'controls-visible' : 'controls-hidden'}`}>
+      {/* Floating Controls: Music & Chapter Navigation */}
+      <div className="fixed-floating-controls">
         <MusicControl isPlaying={isPlaying} onToggle={toggleMusic} />
         {isOpened && <InvitationNavigation />}
       </div>
 
       {/* Mobile-first Invitation Canvas */}
       <main className="invitation-canvas">
-        {/* 1. Opening Cover Envelope */}
+        {/* 1. 3D Royal Door Opening Overlay (Sits directly in front of the Sanctum) */}
         <Opening 
           isOpened={isOpened}
           isOpeningAnim={isOpeningAnim}
-          onOpenInvitation={handleOpenInvitation} 
+          onOpenDoors={handleOpenDoors}
         />
 
-        {/* 2-8. Unfolding Invitation Chapters (Revealed upon clicking Open Invitation) */}
-        {isOpened && (
-          <div className="invitation-story-unfolded">
-            {/* 2. Formal Invitation Reveal */}
-            <InvitationReveal />
+        {/* 2. Primary Top Screen: Temple Sanctum Reveal */}
+        <InvitationReveal />
 
-            {/* 3. Interactive Special Date (3 Scratch Hearts) */}
+        {/* 3-8. Unfolding Invitation Chapters */}
+        {(isOpened || isOpeningAnim) && (
+          <div className="invitation-story-unfolded">
+            {/* 3. Interactive Special Date (3 Scratch Hearts in Triangle Layout) */}
             <SpecialDate />
 
-            {/* 4. Progressive Wedding Itinerary Timeline */}
+            {/* 4. Wedding Timeline with Bell Ornament */}
             <WeddingTimeline />
 
-            {/* 5. Destination Palace Venue */}
+            {/* 5. Venue Destination */}
             <Venue />
 
             {/* 6. Live Auspicious Countdown */}
             <Countdown />
 
-            {/* 7. Cherished Memories & Swipeable Photo Slider */}
+            {/* 7. Our Moments — Polaroid Memories Slider */}
             <Memories />
 
-            {/* 8. Closing Blessing, Couple Signatures & RSVP */}
+            {/* 8. Dear Guest / Final Blessing & RSVP */}
             <ClosingMessage />
           </div>
         )}
