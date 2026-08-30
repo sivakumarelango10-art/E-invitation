@@ -437,6 +437,7 @@ html, body {
   width: 100%;
   max-width: 360px;
   margin: var(--space-md) auto var(--space-lg);
+  touch-action: pan-y;
 }
 
 .scratch-heart-wrapper {
@@ -452,6 +453,11 @@ html, body {
           drop-shadow(0 0 1px rgba(197, 168, 128, 0.6));
   transition: transform 0.3s var(--ease-cinematic), filter 0.3s ease;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none !important;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 .scratch-heart-card:hover {
@@ -472,6 +478,10 @@ html, body {
   position: relative;
   clip-path: path('M 120 195 C 114 189 40 128 18 88 C 2 58 12 22 45 12 C 72 4 98 18 120 45 C 142 18 168 4 195 12 C 228 22 238 58 222 88 C 200 128 126 189 120 195 Z');
   background-color: var(--bg-ivory-card);
+  touch-action: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 /* Revealed Date Content Beneath Foil */
@@ -486,6 +496,9 @@ html, body {
     radial-gradient(circle at 50% 35%, #FFFFFF 0%, #FAF3E8 65%, #F4E5CF 100%);
   padding: 30px 18px 20px;
   text-align: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .heart-shimmer-bg {
@@ -539,14 +552,20 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   cursor: crosshair;
-  touch-action: none;
+  touch-action: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
   transition: opacity 0.45s var(--ease-cinematic);
 }
 
 .scratch-canvas.scratched-away {
   opacity: 0 !important;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 /* Scratch Hint Instruction */
