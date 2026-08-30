@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Sparkles } from 'lucide-react';
 
 export function ScratchHeart({ 
   label, 
@@ -46,7 +45,7 @@ export function ScratchHeart({
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
 
-    // Shimmering micro sparkles
+    // Shimmering micro dust
     ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
     for (let i = 0; i < 14; i++) {
       const px = (i * 23) % width;
@@ -225,11 +224,6 @@ export function ScratchHeart({
         {/* Revealed Content (Gold Number / Month / Year) */}
         <div className="ref-heart-revealed-layer">
           <span className="ref-heart-value">{value}</span>
-          {isComplete && (
-            <div className="ref-heart-sparkle" aria-hidden="true">
-              <Sparkles style={{ width: '12px', height: '12px' }} />
-            </div>
-          )}
         </div>
 
         {/* Scratchable Gold Canvas */}

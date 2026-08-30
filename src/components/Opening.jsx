@@ -1,6 +1,5 @@
 import React from 'react';
 import { weddingConfig } from '../config/weddingConfig';
-import { Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export function Opening({ isOpened, isOpeningAnim, onOpenInvitation }) {
@@ -56,7 +55,6 @@ export function Opening({ isOpened, isOpeningAnim, onOpenInvitation }) {
             onClick={handleOpenDoors}
             aria-label="Open Invitation Doors"
           >
-            <Sparkles style={{ width: '16px', height: '16px', color: '#D4AF37' }} />
             <span>{weddingConfig.doorButtonText}</span>
           </button>
 

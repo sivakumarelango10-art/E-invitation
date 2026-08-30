@@ -31,7 +31,7 @@ export const weddingConfig = {
   // Interactive Special Date (Three Hearts)
   dateTitle: "Our Special Date",
   dateSubtitle: "A little touch reveals the date",
-  dateHint: "✦ Reveal each heart to discover the date ✦",
+  dateHint: "Reveal each heart to discover the date",
   dateEpilogue: "And so, our forever begins...",
   
   // Timeline Itinerary
