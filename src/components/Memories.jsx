@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { weddingConfig } from '../config/weddingConfig';
 import { FloralDivider } from './OrnamentMotif';
 import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
@@ -7,8 +7,19 @@ import { PhotoViewer } from './PhotoViewer';
 export function Memories() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxPhoto, setLightboxPhoto] = useState(null);
-  const [touchStartX, setTouchStartX] = useState(null);
+  const touchStartXRef = useRef(null);
+  const isDraggingRef = useRef(false);
   const totalPhotos = weddingConfig.galleryImages.length;
+
+  // Preload all gallery images immediately for instant 0ms switching
+  useEffect(() => {
+    weddingConfig.galleryImages.forEach((photo) => {
+      const img = new Image();
+      img.src = photo.url.replace(/\.jpg$/, '.webp');
+      const fallback = new Image();
+      fallback.src = photo.url;
+    });
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % totalPhotos);
@@ -18,22 +29,24 @@ export function Memories() {
     setCurrentIndex((prev) => (prev - 1 + totalPhotos) % totalPhotos);
   };
 
+  // Touch Swipe Handlers (Passive-friendly on slider track)
   const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
+    touchStartXRef.current = e.touches[0].clientX;
+    isDraggingRef.current = true;
   };
 
   const handleTouchEnd = (e) => {
-    if (touchStartX === null) return;
+    if (!isDraggingRef.current || touchStartXRef.current === null) return;
     const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
+    const diff = touchStartXRef.current - touchEndX;
 
-    // Minimum swipe threshold 40px
-    if (diff > 40) {
+    if (diff > 45) {
       handleNext();
-    } else if (diff < -40) {
+    } else if (diff < -45) {
       handlePrev();
     }
-    setTouchStartX(null);
+    touchStartXRef.current = null;
+    isDraggingRef.current = false;
   };
 
   const activePhoto = weddingConfig.galleryImages[currentIndex];
@@ -50,41 +63,60 @@ export function Memories() {
         <FloralDivider />
       </div>
 
-      {/* Swipeable Photo Container */}
+      {/* High-Performance Sliding Viewport */}
       <div 
         className="memories-slider-wrapper reveal-init stagger-2"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div 
-          className="memories-slide-card"
-          onClick={() => setLightboxPhoto(activePhoto)}
-          role="button"
-          tabIndex={0}
-          aria-label={`View photo ${currentIndex + 1} of ${totalPhotos}: ${activePhoto.title}`}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setLightboxPhoto(activePhoto);
-            }
-          }}
-        >
-          <img 
-            key={activePhoto.url}
-            src={activePhoto.url} 
-            alt={activePhoto.title}
-            style={{ animation: 'photoSettle 0.8s var(--ease-cinematic) forwards' }}
-            loading="lazy"
-          />
+        <div className="memories-viewport-frame">
+          {/* Continuous GPU-Accelerated Slider Track */}
+          <div 
+            className="memories-slider-track"
+            style={{ transform: `translate3d(-${currentIndex * 100}%, 0, 0)` }}
+          >
+            {weddingConfig.galleryImages.map((photo, index) => {
+              const webpUrl = photo.url.replace(/\.jpg$/, '.webp');
 
-          {/* Gradient Overlay with Captions */}
-          <div className="memories-slide-overlay">
-            <span className="memories-tag">{activePhoto.tag}</span>
-            <h3 className="memories-slide-title">{activePhoto.title}</h3>
-            <p className="memories-slide-caption">{activePhoto.caption}</p>
-            
-            <div style={{ position: 'absolute', top: '16px', right: '16px', color: 'rgba(255,255,255,0.7)' }}>
-              <Maximize2 style={{ width: '18px', height: '18px' }} />
-            </div>
+              return (
+                <div 
+                  key={photo.url}
+                  className="memories-slide-item"
+                  onClick={() => setLightboxPhoto(photo)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View photo ${index + 1} of ${totalPhotos}: ${photo.title}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      setLightboxPhoto(photo);
+                    }
+                  }}
+                >
+                  <div className="memories-slide-card">
+                    <picture>
+                      <source srcSet={webpUrl} type="image/webp" />
+                      <img 
+                        src={photo.url} 
+                        alt={photo.title}
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </picture>
+
+                    {/* Gradient Overlay with Captions */}
+                    <div className="memories-slide-overlay">
+                      <span className="memories-tag">{photo.tag}</span>
+                      <h3 className="memories-slide-title">{photo.title}</h3>
+                      <p className="memories-slide-caption">{photo.caption}</p>
+                      
+                      <div className="memories-maximize-badge">
+                        <Maximize2 style={{ width: '16px', height: '16px' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 

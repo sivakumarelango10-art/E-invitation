@@ -1000,24 +1000,46 @@ html, body {
   user-select: none;
 }
 
-.memories-slide-card {
+.memories-viewport-frame {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-sm);
   overflow: hidden;
-  position: relative;
+  border-radius: var(--radius-sm);
   box-shadow: 
     0 16px 40px rgba(42, 24, 16, 0.15),
     0 0 0 1px var(--gold-border);
-  cursor: pointer;
   background-color: var(--bg-ivory-subtle);
 }
 
-.memories-slide-card img {
+.memories-slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.memories-slide-item {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.memories-slide-card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--bg-ivory-subtle);
+  overflow: hidden;
+}
+
+.memories-slide-card img,
+.memories-slide-card picture {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+}
+
+.memories-slide-card img {
+  object-fit: cover;
   transition: transform 0.6s var(--ease-cinematic);
 }
 
@@ -1028,7 +1050,7 @@ html, body {
 .memories-slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(20, 12, 8, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(20, 12, 8, 0.88) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1059,6 +1081,22 @@ html, body {
   font-size: 0.76rem;
   color: var(--text-on-dark-muted);
   line-height: 1.4;
+}
+
+.memories-maximize-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* Slider Controls Bar */
